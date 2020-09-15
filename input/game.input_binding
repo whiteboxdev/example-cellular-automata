@@ -1,0 +1,24 @@
+key_trigger {
+  input: KEY_1
+  action: "input_1"
+}
+key_trigger {
+  input: KEY_2
+  action: "input_2"
+}
+key_trigger {
+  input: KEY_3
+  action: "input_3"
+}
+key_trigger {
+  input: KEY_4
+  action: "input_4"
+}
+key_trigger {
+  input: KEY_5
+  action: "input_5"
+}
+key_trigger {
+  input: KEY_6
+  action: "input_6"
+}

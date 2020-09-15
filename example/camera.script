@@ -1,0 +1,6 @@
+local h_str = require "example.h_str"
+
+function init(self)
+	msg.post("#camera", h_str.acquire_camera_focus)
+	msg.post("@render:", h_str.use_fixed_projection)
+end

@@ -1,0 +1,167 @@
+----------------------------------------------------------------------
+-- LICENSE
+----------------------------------------------------------------------
+
+-- MIT License
+
+-- Copyright (c) 2020 Klayton Kowalski
+
+-- Permission is hereby granted, free of charge, to any person obtaining a copy
+-- of this software and associated documentation files (the "Software"), to deal
+-- in the Software without restriction, including without limitation the rights
+-- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+-- copies of the Software, and to permit persons to whom the Software is
+-- furnished to do so, subject to the following conditions:
+
+-- The above copyright notice and this permission notice shall be included in all
+-- copies or substantial portions of the Software.
+
+-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+-- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+-- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+-- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+-- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+-- SOFTWARE.
+
+-- https://github.com/klaytonkowalski/cellular-automata
+
+----------------------------------------------------------------------
+-- DEPENDENCIES
+----------------------------------------------------------------------
+
+local h_str = require "example.h_str"
+
+----------------------------------------------------------------------
+-- CONSTANTS
+----------------------------------------------------------------------
+
+local tilemap_size = { x = 160, y = 90 }
+
+local tile_ids = {
+	white = 1,
+	black = 2,
+	red = 3,
+	green = 4,
+	yellow = 5,
+	magenta = 6,
+	cyan = 7,
+	brown = 8
+}
+
+----------------------------------------------------------------------
+-- FUNCTIONS
+----------------------------------------------------------------------
+
+local function draw_tilemap(tile_id_grid)
+	for i = 1, tilemap_size.y do
+		for j = 1, tilemap_size.x do
+			tilemap.set_tile("#tilemap", h_str.layer_main, j, tilemap_size.y - i + 1, tile_id_grid[i][j])
+		end
+	end
+end
+
+local function shallow_copy(tile_id_grid)
+	local copy = {}
+	for i = 1, tilemap_size.y do
+		table.insert(copy, {})
+		for j = 1, tilemap_size.x do
+			table.insert(copy[i], tile_id_grid[i][j])
+		end
+	end
+	return copy
+end
+
+local function init_grid()
+	local grid = {}
+	for i = 1, tilemap_size.y do
+		table.insert(grid, {})
+		for j = 1, tilemap_size.x do
+			table.insert(grid[i], tile_ids.black)
+		end
+	end
+	return grid
+end
+
+local function generate_noise(tile_id_grid, noise_density)
+	for i = 1, tilemap_size.y do
+		for j = 1, tilemap_size.x do
+			local tile_id = math.random(100) > noise_density and tile_ids.white or tile_ids.black
+			tile_id_grid[i][j] = tile_id
+		end
+	end
+end
+
+local function cellular_automata(tile_id_grid, iterations)
+	for i = 1, iterations do
+		local tile_id_grid_iteration = shallow_copy(tile_id_grid)
+		for j = 1, tilemap_size.y do
+			for k = 1, tilemap_size.x do
+				local neighbor_wall_count = 0
+				local border = false
+				for y = j - 1, j + 1 do
+					for x = k - 1, k + 1 do
+						if y >= 1 and x >= 1 and y <= tilemap_size.y and x <= tilemap_size.x then
+							if y ~= j or x ~= k then
+								if tile_id_grid_iteration[y][x] == tile_ids.black then
+									neighbor_wall_count = neighbor_wall_count + 1
+								end
+							end
+						else
+							border = true
+						end
+					end
+				end
+				tile_id_grid[j][k] = (neighbor_wall_count > 4 or border) and tile_ids.black or tile_ids.white
+			end
+		end
+	end
+end
+
+local function perform_cellular_automata(tile_id_grid, noise_density, iterations)
+	generate_noise(tile_id_grid, noise_density)
+	cellular_automata(tile_id_grid, iterations)
+	draw_tilemap(tile_id_grid)
+end
+
+local function perform_cellular_automata_step(tile_id_grid)
+	cellular_automata(tile_id_grid, 1)
+	draw_tilemap(tile_id_grid)
+end
+
+function init(self)
+	self.tile_id_grid = init_grid()
+	self.noise_density = 50
+	self.iterations = 0
+	msg.post("#", h_str.acquire_input_focus)
+	math.randomseed(os.clock() * 100000000000)
+	perform_cellular_automata(self.tile_id_grid, self.noise_density, self.iterations)
+end
+
+function on_input(self, action_id, action)
+	if action.pressed then
+		if action_id == h_str.input_1 and self.noise_density < 100 then
+			self.noise_density = self.noise_density + 1
+			msg.post("#gui", h_str.msg_update_noise_density, { value = self.noise_density })
+			perform_cellular_automata(self.tile_id_grid, self.noise_density, self.iterations)
+		elseif action_id == h_str.input_2 and self.noise_density > 0 then
+			self.noise_density = self.noise_density - 1
+			msg.post("#gui", h_str.msg_update_noise_density, { value = self.noise_density })
+			perform_cellular_automata(self.tile_id_grid, self.noise_density, self.iterations)
+		elseif action_id == h_str.input_3 then
+			self.iterations = self.iterations + 1
+			msg.post("#gui", h_str.msg_update_iterations, { value = self.iterations })
+			perform_cellular_automata(self.tile_id_grid, self.noise_density, self.iterations)
+		elseif action_id == h_str.input_4 and self.iterations > 0 then
+			self.iterations = self.iterations - 1
+			msg.post("#gui", h_str.msg_update_iterations, { value = self.iterations })
+			perform_cellular_automata(self.tile_id_grid, self.noise_density, self.iterations)
+		elseif action_id == h_str.input_5 then
+			perform_cellular_automata(self.tile_id_grid, self.noise_density, self.iterations)
+		elseif action_id == h_str.input_6 then
+			self.iterations = self.iterations + 1
+			msg.post("#gui", h_str.msg_update_iterations, { value = self.iterations })
+			perform_cellular_automata_step(self.tile_id_grid)
+		end
+	end
+end

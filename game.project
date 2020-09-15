@@ -1,0 +1,29 @@
+[bootstrap]
+main_collection = /example/main.collectionc
+
+[script]
+shared_state = 1
+
+[display]
+width = 1280
+height = 720
+update_frequency = 60
+
+[android]
+input_method = HiddenInputField
+
+[project]
+title = Cellular Automata
+
+[graphics]
+default_texture_min_filter = nearest
+default_texture_mag_filter = nearest
+
+[tilemap]
+max_tile_count = 16384
+
+[html5]
+splash_image = /assets/splash_image.png
+show_fullscreen_button = 0
+scale_mode = no_scale
+
