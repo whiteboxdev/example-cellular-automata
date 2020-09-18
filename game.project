@@ -23,7 +23,6 @@ default_texture_mag_filter = nearest
 max_tile_count = 16384
 
 [html5]
-splash_image = /assets/splash_image.png
 show_fullscreen_button = 0
 scale_mode = no_scale
 
