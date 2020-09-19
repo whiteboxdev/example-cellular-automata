@@ -6,3 +6,14 @@ Play with the interactive HTML5 demo: https://gymratgames.github.io/bundles/cell
 
 Please click the "Star" button on GitHub if you find this asset to be useful!  
 If you wish to support me and the work I do, please consider becoming one of my [patrons](https://www.patreon.com/klaytonkowalski).
+
+![alt text](https://github.com/gymratgames/cellular-automata/blob/master/assets/thumbnail.png?raw=true)
+
+## Controls
+The demo uses the following controls:
+  - <1> Increase noise density
+  - <2> Decrease noise density
+  - <3> Increase iteration count
+  - <4> Decrease iteration count
+  - <5> Regenerate map with current settings
+  - <6> Increment iteration count on current map
