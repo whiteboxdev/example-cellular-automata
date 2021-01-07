@@ -1,7 +1,6 @@
 local h_str = {}
 
 h_str.acquire_camera_focus = hash("acquire_camera_focus")
-h_str.use_fixed_projection = hash("use_fixed_projection")
 h_str.acquire_input_focus = hash("acquire_input_focus")
 h_str.input_1 = hash("input_1")
 h_str.input_2 = hash("input_2")

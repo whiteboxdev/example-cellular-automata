@@ -69,7 +69,7 @@ nodes {
 }
 nodes {
   position {
-    x: 1260.0
+    x: 1270.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -100,11 +100,11 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Kowalski Game Development"
+  text: "Klayton Kowalski"
   font: "font_2"
   id: "node_studio"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
+  xanchor: XANCHOR_RIGHT
+  yanchor: YANCHOR_BOTTOM
   pivot: PIVOT_SE
   outline {
     x: 0.0
@@ -131,7 +131,7 @@ nodes {
 }
 nodes {
   position {
-    x: 20.0
+    x: 10.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -193,7 +193,7 @@ nodes {
 }
 nodes {
   position {
-    x: 310.0
+    x: 300.0
     y: 0.0
     z: 0.0
     w: 1.0
