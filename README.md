@@ -1,5 +1,5 @@
 # Cellular Automata
-Demonstration of cellular automata and procedural map generation.
+Example of cellular automata and procedural map generation.
 
 Watch the reference video: https://www.youtube.com/watch?v=slTEz6555Ts  
 Play with the interactive HTML5 demo: https://klaytonkowalski.github.io/bundles/cellular-automata/index.html
