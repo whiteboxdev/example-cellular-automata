@@ -14,9 +14,11 @@ Please click the ☆ button on GitHub if this repository is useful or interestin
 
 ## Controls
 
-<1> Increase noise density.  
-<2> Decrease noise density.  
-<3> Increase iteration count.  
-<4> Decrease iteration count.  
-<5> Regenerate map with current settings.  
-<6> Increment iteration count on current map.
+| Control | Description |
+| ------- | ----------- |
+| 1 | Increase the noise density. |
+| 2 | Decrease the noise density. |
+| 3 | Increase the iteration count. |
+| 4 | Decrease the iteration count. |
+| 5 | Regenerate the map with the current settings. |
+| 6 | Increment the interation count on the current map. |
