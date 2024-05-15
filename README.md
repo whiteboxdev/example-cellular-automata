@@ -6,11 +6,11 @@ Watch the reference video:
 https://www.youtube.com/watch?v=slTEz6555Ts
 
 Play with the interactive HTML5 demo:  
-https://klaytonkowalski.github.io/bundles/cellular-automata/index.html
+https://whiteboxdev.github.io/bundles/example-cellular-automata/index.html
 
 Please click the ☆ button on GitHub if this repository is useful or interesting. Thank you!
 
-![alt text](https://github.com/klaytonkowalski/cellular-automata/blob/master/assets/thumbnail.png?raw=true)
+![alt text](https://github.com/whiteboxdev/example-cellular-automata/blob/master/assets/thumbnail.png?raw=true)
 
 ## Controls
 

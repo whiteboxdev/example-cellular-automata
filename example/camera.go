@@ -21,6 +21,8 @@ embedded_components {
   "near_z: 0.1\n"
   "far_z: 1000.0\n"
   "auto_aspect_ratio: 0\n"
+  "orthographic_projection: 0\n"
+  "orthographic_zoom: 1.0\n"
   ""
   position {
     x: 0.0

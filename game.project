@@ -14,6 +14,9 @@ input_method = HiddenInputField
 
 [project]
 title = Cellular Automata
+publisher = Klayton Kowalski
+developer = Klayton Kowalski
+version = 1.0.0
 
 [graphics]
 default_texture_min_filter = nearest
@@ -25,4 +28,5 @@ max_tile_count = 16384
 [html5]
 show_fullscreen_button = 0
 scale_mode = no_scale
+cssfile = /builtins/manifests/web/dark_theme.css
 
